@@ -20,6 +20,9 @@
 %%% @copyright 2020 Anatoly Rodionov
 %%%
 %%% @doc collection of macros for working with record field names
+%%% I found these macros useful for debugging and fast prototyping.
+%%% You may take a look on simple example in recods_macros.erl in src
+%%% directory 
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -28,7 +31,7 @@
 
 %-----------------------------------------------------------------------------------------------
 
-% @doc Creates unanimous function which returns field index in the record RECORD_NAME.
+% @doc Creates anonymous function which returns field index in the record RECORD_NAME.
 % @spec fun([atom()], atom(), pos_integer(), fun()) -> pos_integer().
 -define(FIND_RECORD_INDEX_BY_NAME(RECORD_NAME),
 	fun(Lst, X, N, F) -> 
@@ -41,6 +44,8 @@
 
 % @doc Creates one argument function with the name RECORD_NAME which returns
 % key value pairs for all record fields.
+% This function can be used to create map from record:
+% maps:from_list(RECORD_NAME(record()))
 % @spec RECORD_NAME(record()) -> [{atom(), term()].
 -define(GET_RECORD_ALL_FIELDS(RECORD_NAME),
     RECORD_NAME(Record) when is_record(Record, RECORD_NAME) -> 

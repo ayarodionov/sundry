@@ -19,41 +19,103 @@
 %%% @author Anatoly Rodionov <anatoly.ya.rodionov@gmail.com>
 %%% @copyright 2020 Anatoly Rodionov
 %%%
-%%% @doc collection of macros for working with record field names
+%%% @doc This is a simple example how
+%%% collection of macros for working with record field names
+%%  can be used in gen_server.
+%%%
+%%% I use #s_t record as loop data in gen_server. Suppose that
+%%% only record field a is of often use. For this particular field
+%%% there are special cases in handle_cast and handle_call callbacks.
+%%% All other filed can be manipulated with the help of functions
+%%% s_t/2 and s_t/3. You do not need to write special accessors for them.
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %-----------------------------------------------------------------------------------------------
 
 -module(record_macros).
+-behavior(gen_server).
+-vsn(1.0).
 
--include("../include/record_macros.hrl").
-
--export([rrr/2]).
--export([rrr/3]).
-
--export([test/0, test/1, test/2]).
-
--record(rrr, {a,b,c}).
+%-----------------------------------------------------------------------------------------------
+-include("record_macros.hrl").
+%-----------------------------------------------------------------------------------------------
+-export([start/0, start_link/0, init/1]).
+-export([handle_cast/2, handle_call/3]).
+-export([info/0, get/1, set/2]).
 
 
+-define(MIN_PORT_NUMBER, 53).
+-define(MAX_PORT_NUMBER, 65434).
 
-test() -> rrr(#rrr{a=1,b=2,c=3}).
+%-----------------------------------------------------------------------------------------------
+-record(s_t, {
+	a   =  1 :: integer(),
+	b   =  2 :: integer(),
+	c   =  3 :: integer(),
+	d   =  4 :: integer()
+    }).
+-type s_t() :: #s_t{}.
 
-test(X) -> rrr(#rrr{a=1,b=2,c=3}, X).
+%-----------------------------------------------------------------------------------------------
+% Interfaces
+%-----------------------------------------------------------------------------------------------
 
-test(X,Y) -> rrr(#rrr{a=1,b=2,c=3}, X, Y).
+-spec start() -> {ok, pid()}.
+% @doc Starts {@module}.
+start() ->
+    gen_server:start({local, ?MODULE}, ?MODULE, {}, []).
 
-?GET_RECORD_ALL_FIELDS(rrr).
-?GET_RECORD_FIELD_BY_NAME(rrr).
-?SET_RECORD_FIELD_BY_NAME(rrr).
+-spec start_link() -> {ok, pid()}.
+% @doc Starts {@module}.
+start_link() ->
+    gen_server:start_link({local, ?MODULE}, ?MODULE, {}, []).
 
-% record_macros:test(b).
+-spec init(any()) -> {ok, s_t()}. 
+% @doc Inits {@module}.
+init({})  ->
+    {ok, #s_t{}}.
 
-% F = fun(Lst, X, N, F) -> 
-% 	case Lst of
-% 		[]        -> 1;
-% 		[X | _]   -> N;
-% 		[_ | Cdr] -> F(Cdr, X, N + 1, F)
-% 	end
-% end.
+%-----------------------------------------------------------------------------------------------
+-spec set(atom(), term()) -> ok.
+% @doc Sets any field in loop record
+set(Field, Value) ->
+    gen_server:cast(?MODULE, {set, Field, Value}).
+
+-spec get(atom()) -> term().
+% @doc Gets any field from loop record
+get(Field) ->
+    gen_server:call(?MODULE, {get, Field}).
+
+-spec info() -> [{atom(), term()}].
+% @doc Constructs property list from loop record
+info() ->
+    gen_server:call(?MODULE, info).
+
+%-----------------------------------------------------------------------------------------------
+% Callbacks
+%-----------------------------------------------------------------------------------------------
+handle_cast({set, a, Value}, ST) ->
+    {noreply, ST#s_t{a = Value}};
+
+handle_cast({set, Field, Value}, ST) ->
+    {noreply, s_t(ST, Field, Value)}.
+
+handle_call({get, a}, _From, ST) ->
+    {reply, ST#s_t.a, ST};
+
+handle_call({get, Field}, _From, ST) ->
+    {reply, s_t(ST, Field), ST};
+
+handle_call(info, _From, ST) ->
+    {reply, s_t(ST), ST}.
+
+%-----------------------------------------------------------------------------------------------
+% private
+%-----------------------------------------------------------------------------------------------
+
+?GET_RECORD_ALL_FIELDS(s_t).
+?GET_RECORD_FIELD_BY_NAME(s_t).
+?SET_RECORD_FIELD_BY_NAME(s_t).
+
+%-----------------------------------------------------------------------------------------------

@@ -55,3 +55,16 @@ rrr_test() ->
     ok.
 
 %-------------------------------------------------------------------------------------------------
+
+st_test() ->
+    {ok, _} = record_macros:start(),
+    ?assertMatch([{a,1},{b,2},{c,3},{d,4}], record_macros:info()),
+    ?assertMatch(1,   record_macros:get(a)),
+    ?assertMatch(2,   record_macros:get(b)),
+    ?assertMatch(ok,  record_macros:set(a, 11)),
+    ?assertMatch(ok,  record_macros:set(b, 22)),
+    ?assertMatch(11,  record_macros:get(a)),
+    ?assertMatch(22,  record_macros:get(b)),
+    ok.
+
+%-------------------------------------------------------------------------------------------------
