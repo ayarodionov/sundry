@@ -43,10 +43,10 @@
 	end).
 
 % @doc Creates one argument function with the name RECORD_NAME which returns
-% if the argument is a record reruns map with record field name as keys.
+% if the argument is a record returns map with record field name as keys.
 % @spec RECORD_NAME(record()) -> map().
 % If the function argument is a map then it creates record with name RECORD_NAME
-% and fields are corresponding values in map or undefined if there is no such key.
+% and fields values of corresponding values in map or undefined if there is no such key.
 % @spec RECORD_NAME(map()) -> record().
 -define(RECORD_TF_MAP(RECORD_NAME),
     RECORD_NAME(Record) when is_record(Record, RECORD_NAME) -> 
