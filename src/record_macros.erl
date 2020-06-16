@@ -114,7 +114,7 @@ handle_call(info, _From, ST) ->
 % private
 %-----------------------------------------------------------------------------------------------
 
-?GET_RECORD_ALL_FIELDS(s_t).
+?RECORD_ALL_FIELDS(s_t).
 ?GET_RECORD_FIELD_BY_NAME(s_t).
 ?SET_RECORD_FIELD_BY_NAME(s_t).
 

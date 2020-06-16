@@ -38,7 +38,7 @@
 
 %-----------------------------------------------------------------------------------------------
 
-?GET_RECORD_ALL_FIELDS(rrr).
+?RECORD_ALL_FIELDS(rrr).
 ?GET_RECORD_FIELD_BY_NAME(rrr).
 ?SET_RECORD_FIELD_BY_NAME(rrr).
 
@@ -52,6 +52,7 @@ rrr_test() ->
     ?assertMatch(2,   rrr(#rrr{}, b)),
     ?assertMatch(rrr, rrr(#rrr{}, x)),
     ?assertMatch(22,  rrr(rrr(#rrr{}, b, 22), b)),
+    ?assertMatch(#rrr{}, rrr(#{a=>1, b=>2, c=>3, d=>4})),
     ok.
 
 %-------------------------------------------------------------------------------------------------

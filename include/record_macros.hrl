@@ -47,9 +47,14 @@
 % This function can be used to create map from record:
 % maps:from_list(RECORD_NAME(record()))
 % @spec RECORD_NAME(record()) -> [{atom(), term()].
--define(GET_RECORD_ALL_FIELDS(RECORD_NAME),
+% If the function argument is a map then it creates record with name RECORD_NAME
+% @spec RECORD_NAME(map()) -> record.
+-define(RECORD_ALL_FIELDS(RECORD_NAME),
     RECORD_NAME(Record) when is_record(Record, RECORD_NAME) -> 
-        lists:zip(record_info(fields, RECORD_NAME), lists:nthtail(1, tuple_to_list(Record)))).
+        lists:zip(record_info(fields, RECORD_NAME), lists:nthtail(1, tuple_to_list(Record)));
+    RECORD_NAME(Map) when is_map(Map) ->
+        list_to_tuple([RECORD_NAME | [maps:get(X, Map, undefined) || X <- record_info(fields, RECORD_NAME)]])
+        ).
 
 % @doc Creates two arguments function with the name RECORD_NAME which returns value
 % of the field Name in Record.
