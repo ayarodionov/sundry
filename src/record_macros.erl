@@ -87,8 +87,8 @@ set(Field, Value) ->
 get(Field) ->
     gen_server:call(?MODULE, {get, Field}).
 
--spec info() -> [{atom(), term()}].
-% @doc Constructs property list from loop record
+-spec info() -> map().
+% @doc Constructs map from loop record
 info() ->
     gen_server:call(?MODULE, info).
 
@@ -114,7 +114,7 @@ handle_call(info, _From, ST) ->
 % private
 %-----------------------------------------------------------------------------------------------
 
-?RECORD_ALL_FIELDS(s_t).
+?RECORD_TF_MAP(s_t).
 ?GET_RECORD_FIELD_BY_NAME(s_t).
 ?SET_RECORD_FIELD_BY_NAME(s_t).
 

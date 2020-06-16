@@ -43,18 +43,17 @@
 	end).
 
 % @doc Creates one argument function with the name RECORD_NAME which returns
-% key value pairs for all record fields.
-% This function can be used to create map from record:
-% maps:from_list(RECORD_NAME(record()))
-% @spec RECORD_NAME(record()) -> [{atom(), term()].
+% if the argument is a record reruns map with record field name as keys.
+% @spec RECORD_NAME(record()) -> map().
 % If the function argument is a map then it creates record with name RECORD_NAME
-% @spec RECORD_NAME(map()) -> record.
--define(RECORD_ALL_FIELDS(RECORD_NAME),
+% and fields are corresponding values in map or undefined if there is no such key.
+% @spec RECORD_NAME(map()) -> record().
+-define(RECORD_TF_MAP(RECORD_NAME),
     RECORD_NAME(Record) when is_record(Record, RECORD_NAME) -> 
-        lists:zip(record_info(fields, RECORD_NAME), lists:nthtail(1, tuple_to_list(Record)));
+        maps:from_list(lists:zip(record_info(fields, RECORD_NAME), lists:nthtail(1, tuple_to_list(Record))));
     RECORD_NAME(Map) when is_map(Map) ->
         list_to_tuple([RECORD_NAME | [maps:get(X, Map, undefined) || X <- record_info(fields, RECORD_NAME)]])
-        ).
+    ).
 
 % @doc Creates two arguments function with the name RECORD_NAME which returns value
 % of the field Name in Record.
@@ -62,7 +61,8 @@
 -define(GET_RECORD_FIELD_BY_NAME(RECORD_NAME),
     RECORD_NAME(Record, Name) when is_record(Record, RECORD_NAME) ->
     	F = ?FIND_RECORD_INDEX_BY_NAME(RECORD_NAME),
-        element(F(record_info(fields, RECORD_NAME), Name, 2, F), Record)). 
+        element(F(record_info(fields, RECORD_NAME), Name, 2, F), Record)
+    ). 
 
 % @doc Creates three arguments function with the name RECORD_NAME which sets value
 % of the field Name in Record to Value.
@@ -70,7 +70,8 @@
 -define(SET_RECORD_FIELD_BY_NAME(RECORD_NAME),
     RECORD_NAME(Record, Name, Value) when is_record(Record, RECORD_NAME) -> 
     	F = ?FIND_RECORD_INDEX_BY_NAME(RECORD_NAME),
-        setelement(F(record_info(fields, RECORD_NAME), Name, 2, F), Record, Value)). 
+        setelement(F(record_info(fields, RECORD_NAME), Name, 2, F), Record, Value)
+    ). 
 
 %-----------------------------------------------------------------------------------------------
 

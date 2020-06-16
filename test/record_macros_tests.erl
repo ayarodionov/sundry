@@ -38,7 +38,7 @@
 
 %-----------------------------------------------------------------------------------------------
 
-?RECORD_ALL_FIELDS(rrr).
+?RECORD_TF_MAP(rrr).
 ?GET_RECORD_FIELD_BY_NAME(rrr).
 ?SET_RECORD_FIELD_BY_NAME(rrr).
 
@@ -47,19 +47,19 @@
 rrr_test() ->
     F = ?FIND_RECORD_INDEX_BY_NAME(rrr),
     ?assertMatch(3, F(record_info(fields, rrr), b, 2, F)),
-    ?assertMatch([{a,1},{b,2},{c,3},{d,4}], rrr(#rrr{})),
+    ?assertMatch([{a,1},{b,2},{c,3},{d,4}], maps:to_list(rrr(#rrr{}))),
+    ?assertMatch(#rrr{}, rrr(#{a=>1, b=>2, c=>3, d=>4})),
 	?assertMatch(1,   rrr(#rrr{}, a)),
     ?assertMatch(2,   rrr(#rrr{}, b)),
     ?assertMatch(rrr, rrr(#rrr{}, x)),
     ?assertMatch(22,  rrr(rrr(#rrr{}, b, 22), b)),
-    ?assertMatch(#rrr{}, rrr(#{a=>1, b=>2, c=>3, d=>4})),
     ok.
 
 %-------------------------------------------------------------------------------------------------
 
 st_test() ->
     {ok, _} = record_macros:start(),
-    ?assertMatch([{a,1},{b,2},{c,3},{d,4}], record_macros:info()),
+    ?assertMatch([{a,1},{b,2},{c,3},{d,4}], maps:to_list(record_macros:info())),
     ?assertMatch(1,   record_macros:get(a)),
     ?assertMatch(2,   record_macros:get(b)),
     ?assertMatch(ok,  record_macros:set(a, 11)),
