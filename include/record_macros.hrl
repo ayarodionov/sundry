@@ -37,7 +37,7 @@
     ([],        _, _, _) -> 1;
     ([X |   _], X, N, _) -> N;
     ([_ | Cdr], X, N, F) -> F(Cdr, X, N + 1, F)
-	end).
+    end).
 
 % @doc Creates one argument function with the name RECORD_NAME which returns
 % if the argument is a record returns map with record field name as keys.
