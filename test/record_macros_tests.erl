@@ -45,7 +45,7 @@
 %-----------------------------------------------------------------------------------------------
 
 rrr_test() ->
-    F = ?FIND_RECORD_INDEX_BY_NAME(rrr),
+    F = ?FIND_RECORD_INDEX_BY_NAME,
     ?assertMatch(3, F(record_info(fields, rrr), b, 2, F)),
     ?assertMatch([{a,1},{b,2},{c,3},{d,4}], maps:to_list(rrr(#rrr{}))),
     ?assertMatch(#rrr{}, rrr(#{a=>1, b=>2, c=>3, d=>4})),

@@ -33,7 +33,7 @@
 
 % @doc Creates anonymous function which returns field index in the record RECORD_NAME.
 % @spec fun([atom()], atom(), pos_integer(), fun()) -> pos_integer().
--define(FIND_RECORD_INDEX_BY_NAME(RECORD_NAME),
+-define(FIND_RECORD_INDEX_BY_NAME,
 	fun(Lst, X, N, F) -> 
 		case Lst of
 			[]        -> 1;
@@ -60,7 +60,7 @@
 % @spec RECORD_NAME(record(), atom()) -> term().
 -define(GET_RECORD_FIELD_BY_NAME(RECORD_NAME),
     RECORD_NAME(Record, Name) when is_record(Record, RECORD_NAME) ->
-    	F = ?FIND_RECORD_INDEX_BY_NAME(RECORD_NAME),
+    	F = ?FIND_RECORD_INDEX_BY_NAME,
         element(F(record_info(fields, RECORD_NAME), Name, 2, F), Record)
     ). 
 
@@ -69,7 +69,7 @@
 % @spec RECORD_NAME(record(), atom(), term()) -> tuple().
 -define(SET_RECORD_FIELD_BY_NAME(RECORD_NAME),
     RECORD_NAME(Record, Name, Value) when is_record(Record, RECORD_NAME) -> 
-    	F = ?FIND_RECORD_INDEX_BY_NAME(RECORD_NAME),
+    	F = ?FIND_RECORD_INDEX_BY_NAME,
         setelement(F(record_info(fields, RECORD_NAME), Name, 2, F), Record, Value)
     ). 
 
