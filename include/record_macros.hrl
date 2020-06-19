@@ -33,13 +33,10 @@
 
 % @doc Creates anonymous function which returns field index in the record RECORD_NAME.
 % @spec fun([atom()], atom(), pos_integer(), fun()) -> pos_integer().
--define(FIND_RECORD_INDEX_BY_NAME,
-	fun(Lst, X, N, F) -> 
-		case Lst of
-			[]        -> 1;
-			[X | _]   -> N;
-			[_ | Cdr] -> F(Cdr, X, N + 1, F)
-		end
+-define(FIND_RECORD_INDEX_BY_NAME, fun
+    ([],        _, _, _) -> 1;
+    ([X |   _], X, N, _) -> N;
+    ([_ | Cdr], X, N, F) -> F(Cdr, X, N + 1, F)
 	end).
 
 % @doc Creates one argument function with the name RECORD_NAME which returns
