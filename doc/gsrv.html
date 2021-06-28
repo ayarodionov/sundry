@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module gsrv</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module gsrv</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>This is a simple implementation of gen_server multi call.
+<p>Copyright © 2021 Anatoly Rodionov
+  </p>
+
+<p><b>Authors:</b> Anatoly Rodionov (<a href="mailto:anatoly.ya.rodionov@gmail.com"><tt>anatoly.ya.rodionov@gmail.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2><p>This is a simple implementation of gen_server multi call.
+   <b>Requires Erlang/OTP 24</b>.</p>
+  
+                                                                              
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#multicall1-1">multicall1/1</a></td><td>Naive implementation; makes gen_server calls one after another.</td></tr>
+<tr><td valign="top"><a href="#multicall2-1">multicall2/1</a></td><td>Makes asynchronous gen_server calls.</td></tr>
+<tr><td valign="top"><a href="#multicall3-1">multicall3/1</a></td><td>Same as multicall2 but treats timeouts differently - it 
+calculates time for each call starting from the last call.</td></tr>
+<tr><td valign="top"><a href="#multicall4-1">multicall4/1</a></td><td>Same as multicall4(CallRequests, ?DEFAULT_TIMEOUT).</td></tr>
+<tr><td valign="top"><a href="#multicall4-2">multicall4/2</a></td><td>Same as multicall2 but another timeout semantic;
+ timeout is understood as time limit for all calls to be completed.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="multicall1-1">multicall1/1</a></h3>
+<div class="spec">
+<p><tt>multicall1(CallRequests::[{pid(), term()} | {pid(), term(), non_neg_integer() | infinity}]) -&gt; [term()]</tt><br></p>
+<p><tt>CallRequests</tt>: list of call requests<br>
+</p>
+<p>returns: list of calls responses in the same order as calls</p>
+</div><p><p>Naive implementation; makes gen_server calls one after another. 
+Execution time is proportional to  sum of all call times.</p>
+
+ This not solution. This function is for illustration and comparison.
+</p>
+
+<h3 class="function"><a name="multicall2-1">multicall2/1</a></h3>
+<div class="spec">
+<p><tt>multicall2(CallRequests::[{pid(), term()} | {pid(), term(), non_neg_integer() | infinity}]) -&gt; [{reply, term()} | timeout | {error, term()}]</tt><br></p>
+<p><tt>CallRequests</tt>: list of call requests<br>
+</p>
+<p>returns: list of receive_response return values  in the same order as calls</p>
+</div><p><p>Makes asynchronous gen_server calls. 
+First asynchronously sends all requests using gen_server:send_request. 
+Then gen_server:receive_response receives results. 
+In this case calls to different recipients are executed concurrently 
+by their servers.</p>
+
+ <p>Execution time may be proportional to time of the longest call. 
+Let N be the the CallRequests length and M - number of different servers; 
+n(i) - number of calls to server(i), t(i,j) - execution time of 
+call(i, j) to service(i). Here 0 &lt; i &lt;= N, 0 &lt; j &lt;= n(i). 
+Let t(i) be the sum of all t(i,j). Expectation time of multicall2 call 
+is evidently max(t(i)).</p>
+
+ <p>In the worst case scenario when N=1 multicall2 is no better than multicall1, 
+but when N=M then execution time may be proportional to time of the longest call.</p>
+
+ The other worst case scenario is when all recipients never answer.
+ In this case full execution time is sum of all timeouts.
+</p>
+
+<h3 class="function"><a name="multicall3-1">multicall3/1</a></h3>
+<div class="spec">
+<p><tt>multicall3(CallRequests::[{pid(), term()} | {pid(), term(), non_neg_integer() | infinity}]) -&gt; [{reply, term()} | timeout | {error, term()}]</tt><br></p>
+<p><tt>CallRequests</tt>: list of call requests<br>
+</p>
+<p>returns: list of receive_response return values in the same order as calls</p>
+</div><p><p>Same as multicall2 but treats timeouts differently - it 
+calculates time for each call starting from the last call.</p>
+
+ <p>Problem of multicall2 is that it changes timeout semantic. 
+It interprets timeout as time of the time started from receive_response call, 
+not from the time of send_request call. multicall3 fixes this by using time 
+the last send_request as the starting time for each receive_response.</p>
+
+ <p>multicall3 not only fixes timeout semantic but also makes the second worst 
+scenario (all recipient do not answer in time). multicall3 will wait only 
+maximum of timeout times.</p>
+
+ There is still reason for using multicall2 - it gives you maximum chances to
+ to receive answers from recipients.
+</p>
+
+<h3 class="function"><a name="multicall4-1">multicall4/1</a></h3>
+<div class="spec">
+<p><tt>multicall4(CallRequests::[{pid(), term()}]) -&gt; [{reply, term()} | timeout | {error, term()}]</tt><br></p>
+<p><tt>CallRequests</tt>: list of call requests<br>
+</p>
+<p>returns: list of receive_response return values</p>
+</div><p>Same as multicall4(CallRequests, ?DEFAULT_TIMEOUT)</p>
+
+<h3 class="function"><a name="multicall4-2">multicall4/2</a></h3>
+<div class="spec">
+<p><tt>multicall4(CallRequests::[{pid(), term()}], Timeout::non_neg_integer() | infinity) -&gt; [{reply, term()} | timeout | {error, term()}]</tt><br></p>
+<p><tt>CallRequests</tt>: list of call requests<br>
+<tt>Timeout</tt>: is time limit for all calls to be completed<br>
+</p>
+<p>returns: list of receive_response return values  in the same order as calls</p>
+</div><p>Same as multicall2 but another timeout semantic;
+ timeout is understood as time limit for all calls to be completed.
+</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

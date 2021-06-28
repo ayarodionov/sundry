@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module lstree</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module lstree</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>pruning algorithm in Erlang.
+<p>Copyright © 2020 Anatoly Rodionov
+  </p>
+
+<p><b>Authors:</b> Anatoly Rodionov (<a href="mailto:anatoly.ya.rodionov@gmail.com"><tt>anatoly.ya.rodionov@gmail.com</tt></a>).</p>
+
+<h2><a name="description">Description</a></h2><p>pruning algorithm in Erlang</p>
+  
+                                                                               -------------------------------------------------------------------------------------------------
+<h2><a name="types">Data Types</a></h2>
+
+<h3 class="typedecl"><a name="type-lsnode">lsnode()</a></h3>
+<p><tt>lsnode() = #lsnode{level = non_neg_integer(), score = integer() | false, children = [<a href="#type-lsnode">lsnode()</a>]}</tt></p>
+
+
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#from_list-1">from_list/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#from_list-2">from_list/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#map-2">map/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#map-3">map/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#map-4">map/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#max-1">max/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#max_min-1">max_min/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#max_min_p-1">max_min_p/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#min-1">min/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#min_max-1">min_max/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#min_max_p-1">min_max_p/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#to_list-1">to_list/1</a></td><td></td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="from_list-1">from_list/1</a></h3>
+<div class="spec">
+<p><tt>from_list(Arg::[number()] | number()) -&gt; <a href="#type-lsnode">lsnode()</a></tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="from_list-2">from_list/2</a></h3>
+<div class="spec">
+<p><tt>from_list(S::[number()] | number(), L::non_neg_integer()) -&gt; <a href="#type-lsnode">lsnode()</a></tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="map-2">map/2</a></h3>
+<div class="spec">
+<p><tt>map(Anode::<a href="#type-lsnode">lsnode()</a>, Fn::function()) -&gt; integer() | [integer()]</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="map-3">map/3</a></h3>
+<div class="spec">
+<p><tt>map(Anode::<a href="#type-lsnode">lsnode()</a>, Fa::function(), Fb::function()) -&gt; integer() | [integer()]</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="map-4">map/4</a></h3>
+<div class="spec">
+<p><tt>map(Anode::<a href="#type-lsnode">lsnode()</a>, Fa::function(), Fb::function(), X4::{number(), number()}) -&gt; integer() | [integer()]</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="max-1">max/1</a></h3>
+<div class="spec">
+<p><tt>max(A::<a href="#type-lsnode">lsnode()</a> | [number()]) -&gt; integer()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="max_min-1">max_min/1</a></h3>
+<div class="spec">
+<p><tt>max_min(A::<a href="#type-lsnode">lsnode()</a> | [number()]) -&gt; integer()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="max_min_p-1">max_min_p/1</a></h3>
+<div class="spec">
+<p><tt>max_min_p(A::<a href="#type-lsnode">lsnode()</a> | [number()]) -&gt; integer()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="min-1">min/1</a></h3>
+<div class="spec">
+<p><tt>min(A::<a href="#type-lsnode">lsnode()</a> | [number()]) -&gt; integer()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="min_max-1">min_max/1</a></h3>
+<div class="spec">
+<p><tt>min_max(A::<a href="#type-lsnode">lsnode()</a> | [number()]) -&gt; integer()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="min_max_p-1">min_max_p/1</a></h3>
+<div class="spec">
+<p><tt>min_max_p(A::<a href="#type-lsnode">lsnode()</a> | [number()]) -&gt; integer()</tt><br></p>
+<p> </p>
+</div>
+
+<h3 class="function"><a name="to_list-1">to_list/1</a></h3>
+<div class="spec">
+<p><tt>to_list(Anode::<a href="#type-lsnode">lsnode()</a>) -&gt; [term()]</tt><br></p>
+<p> </p>
+</div>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>
