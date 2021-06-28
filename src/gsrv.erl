@@ -28,8 +28,8 @@
 multicall1(CallRequests) ->
     lists:map(fun 
       ({Pid, Call})          -> catch gen_server:call(Pid, Call);
-		  ({Pid, Call, Timeout}) -> catch gen_server:call(Pid, Call, Timeout)
-	    end,  CallRequests).
+      ({Pid, Call, Timeout}) -> catch gen_server:call(Pid, Call, Timeout)
+      end,  CallRequests).
 
 -spec multicall2([{pid(), term()} | {pid(), term(), non_neg_integer() | infinity}]) -> 
   [{reply, term()} | timeout | {error, term()}].
@@ -57,8 +57,8 @@ multicall1(CallRequests) ->
 multicall2(CallRequests) ->
     CallRefs = lists:map(fun 
       ({Pid, Call})          -> {gen_server:send_request(Pid, Call), ?DEFAULT_TIMEOUT};
-		  ({Pid, Call, Timeout}) -> {gen_server:send_request(Pid, Call), Timeout}
-		  end, CallRequests),
+      ({Pid, Call, Timeout}) -> {gen_server:send_request(Pid, Call), Timeout}
+      end, CallRequests),
     lists:map(fun ({Ref, Tout}) -> gen_server:receive_response(Ref, Tout) end, CallRefs).
 
 -spec multicall3([{pid(), term()} | {pid(), term(), non_neg_integer() | infinity}]) -> 
@@ -83,8 +83,8 @@ multicall2(CallRequests) ->
 multicall3(CallRequests) ->
     CallRefs = lists:map(fun 
       ({Pid, Call})          -> {gen_server:send_request(Pid, Call), ?DEFAULT_TIMEOUT};
-		  ({Pid, Call, Timeout}) -> {gen_server:send_request(Pid, Call), Timeout}
-		  end, CallRequests),
+      ({Pid, Call, Timeout}) -> {gen_server:send_request(Pid, Call), Timeout}
+      end, CallRequests),
     StartTime = ?CURRENT_TIME,
     lists:map(fun 
       ({Ref, infinity}) -> gen_server:receive_response(Ref, infinity);
