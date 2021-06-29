@@ -4,7 +4,7 @@
 %%% @copyright 2021 Anatoly Rodionov
 %%%
 %%% @doc This is a simple implementation of gen_server multi call.
-%%% <b>Requires Erlang/OTP 24</b>.
+%%% <b>Requires <i>Erlang/OTP 24</i></b>.
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 -module(gsrv).
