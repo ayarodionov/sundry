@@ -10,19 +10,21 @@
 <hr>
 
 <h1>Module record_macros</h1>
-<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>This is a simple example how   
-collection of macros for working with record field names   
-can be used in gen_server.
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#types">Data Types</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>This is a simple example how
+   collection of macros for working with record field names
+   can be used in <i>gen_server</i>.
 <p>Copyright © 2020 Anatoly Rodionov
   </p>
 
 <p><b>Authors:</b> Anatoly Rodionov (<a href="mailto:anatoly.ya.rodionov@gmail.com"><tt>anatoly.ya.rodionov@gmail.com</tt></a>).</p>
 
-<h2><a name="description">Description</a></h2><p>This is a simple example how   
-collection of macros for working with record field names   
-can be used in gen_server.</p>
+<h2><a name="description">Description</a></h2><p>This is a simple example how
+   collection of macros for working with record field names
+   can be used in <i>gen_server</i>.
+   I found these macros useful for debugging and fast prototyping.
+   You can find the macros in <i>include</i> directory.</p>
   
-   <p>I use #s_t record as loop data in gen_server. Suppose that   
+   <p>I use #s_t record as loop data in <i>gen_server</i>. Suppose that   
 only record field a is of often use. For this particular field   
 there are special cases in handle_cast and handle_call callbacks.   
 All other filed can be manipulated with the help of functions   

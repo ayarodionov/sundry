@@ -19,7 +19,7 @@
 %%% @author Anatoly Rodionov <anatoly.ya.rodionov@gmail.com>
 %%% @copyright 2020 Anatoly Rodionov
 %%%
-%%% @doc pruning algorithm in Erlang
+%%% @doc Pruning algorithm in Erlang
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-------------------------------------------------------------------------------------------------
 

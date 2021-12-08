@@ -2,7 +2,7 @@
 %% Copyright (c) 2021 Anatoly Rodionov.  All Rights Reserved.
 %%
 %% This file is provided to you under the Apache License,
-%% Version 2.0 (the "License"); you may not use this file
+%% Version 2.0 (the "License"); you may not use this fileß
 %% except in compliance with the License.  You may obtain
 %% a copy of the License at
 %%
@@ -19,7 +19,7 @@
 %%% @author Anatoly Rodionov <anatoly.ya.rodionov@gmail.com>
 %%% @copyright 2021 Anatoly Rodionov
 %%%
-%%% @doc This is a simple server for testing purposes
+%%% @doc Simple server for testing purposes. Used for {@link gsrv} testing.
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -3,7 +3,8 @@
 %%% @author Anatoly Rodionov <anatoly.ya.rodionov@gmail.com>
 %%% @copyright 2021 Anatoly Rodionov
 %%%
-%%% @doc This is a simple implementation of gen_server multi call.
+%%% @doc Simple implementation of gen_server multi call
+%%% without starting new proesses.
 %%% <b>Requires <i>Erlang/OTP 24</i></b>.
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

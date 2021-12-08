@@ -19,7 +19,7 @@
 %%% @author Anatoly Rodionov <anatoly.ya.rodionov@gmail.com>
 %%% @copyright 2020 Anatoly Rodionov
 %%%
-%%% @doc collection of macros for working with record field names
+%%% @doc collection of macros for working with record field names in run time.
 %%% I found these macros useful for debugging and fast prototyping.
 %%% You may take a look on simple example in recods_macros.erl in src
 %%% directory 

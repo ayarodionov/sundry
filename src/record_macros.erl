@@ -21,9 +21,11 @@
 %%%
 %%% @doc This is a simple example how
 %%% collection of macros for working with record field names
-%%  can be used in gen_server.
-%%%
-%%% I use #s_t record as loop data in gen_server. Suppose that
+%%  can be used in <i>gen_server</i>.
+%%% I found these macros useful for debugging and fast prototyping.
+%%% You can find the macros in <i>include</i> directory.
+%%% 
+%%% I use #s_t record as loop data in <i>gen_server</i>. Suppose that
 %%% only record field a is of often use. For this particular field
 %%% there are special cases in handle_cast and handle_call callbacks.
 %%% All other filed can be manipulated with the help of functions
