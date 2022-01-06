@@ -62,15 +62,3 @@ as_integer(A, Start, Base) ->
     lists:foldl(fun(X, S) -> (X-Start)*P + S end, 0, A).
 
 % -----------------------------------------------------------------------------
-% 8> anagram:as_integer("abc").
-% 57888
-% 9> anagram:as_integer("cab"). 
-% 57888
-% 10> anagram:as_integer("acb"). 
-% 57888
-% 11> anagram:eq("abc","acb").  
-% true
-% 12> anagram:eq("abc","cab"). 
-% true
-% 13> anagram:eq("abc","cxb"). 
-% false

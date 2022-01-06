@@ -6,13 +6,13 @@
 
 <h3>Random collection of Erlang progams</h3>
 
-<ol>
+<ul>
     <li>{@link emedian} - median calculation.</li>
     <li>{@link gsrv} - simple implementation of <i>gen_server</i> multi call.</li>
     <li>{@link lstree} - pruning algorithm.</li>
     <li>{@link record_macros} - collection of macros for working with record field names in run timre.</li>
-    <li>{@link test_srv}- simple server for testing purposes. Used for {@link gsrv} testing.</li>
-    <li>{@link anagram}- Checks if two words are are formed by rearaging their letters (uses only arithmetics).</li>
-</ol>
+    <li>{@link test_srv} - simple server for testing purposes. Used for {@link gsrv} testing.</li>
+    <li>{@link anagram} - Checks if two words are are formed by rearaging their letters (uses only arithmetics).</li>
+</ul>
 
 @end
