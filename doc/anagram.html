@@ -22,24 +22,40 @@
  because big numbers arithmetic is slow.
  Just foor fun - I tried to use only arithmetic operations.
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#as_integer-1">as_integer/1</a></td><td>Calculates unique integer for string.</td></tr>
-<tr><td valign="top"><a href="#as_integer-3">as_integer/3</a></td><td>Calculates unique integer for string.</td></tr>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#as_prod-1">as_prod/1</a></td><td>Calculates product of all charactes
+ Same as <i>as_prod(A, ?ASCII_PRINTABLE_START)</i></td></tr>
+<tr><td valign="top"><a href="#as_prod-2">as_prod/2</a></td><td>Calculates product of all charactes.</td></tr>
+<tr><td valign="top"><a href="#as_sum-1">as_sum/1</a></td><td>Calculates unique integer for string.</td></tr>
+<tr><td valign="top"><a href="#as_sum-3">as_sum/3</a></td><td>Calculates unique integer for string.</td></tr>
 <tr><td valign="top"><a href="#eq-2">eq/2</a></td><td>Checks that two strings consists of the same multy set of letters.</td></tr>
 <tr><td valign="top"><a href="#eq-4">eq/4</a></td><td>Checks that two strings consists of the same multy set of letters.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
 
-<h3 class="function"><a name="as_integer-1">as_integer/1</a></h3>
+<h3 class="function"><a name="as_prod-1">as_prod/1</a></h3>
 <div class="spec">
-<p><tt>as_integer(A::string()) -&gt; pos_integer()</tt><br></p>
+<p><tt>as_prod(A::string()) -&gt; pos_integer()</tt><br></p>
+<p> </p>
+</div><p>Calculates product of all charactes
+ Same as <i>as_prod(A, ?ASCII_PRINTABLE_START)</i></p>
+
+<h3 class="function"><a name="as_prod-2">as_prod/2</a></h3>
+<div class="spec">
+<p><tt>as_prod(A::string(), Start::pos_integer()) -&gt; pos_integer()</tt><br></p>
+<p> </p>
+</div><p>Calculates product of all charactes</p>
+
+<h3 class="function"><a name="as_sum-1">as_sum/1</a></h3>
+<div class="spec">
+<p><tt>as_sum(A::string()) -&gt; pos_integer()</tt><br></p>
 <p> </p>
 </div><p>Calculates unique integer for string.
- Same as <i>as_integer(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE)</i></p>
+ Same as <i>as_sum(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE)</i></p>
 
-<h3 class="function"><a name="as_integer-3">as_integer/3</a></h3>
+<h3 class="function"><a name="as_sum-3">as_sum/3</a></h3>
 <div class="spec">
-<p><tt>as_integer(A::string(), Start::pos_integer(), Base::pos_integer()) -&gt; pos_integer()</tt><br></p>
+<p><tt>as_sum(A::string(), Start::pos_integer(), Base::pos_integer()) -&gt; pos_integer()</tt><br></p>
 <p> </p>
 </div><p>Calculates unique integer for string.</p>
 

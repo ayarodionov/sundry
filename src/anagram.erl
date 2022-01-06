@@ -30,9 +30,11 @@
 - module(anagram).
 
 -export([eq/2, eq/4]).
--export([as_integer/1, as_integer/3]).
+-export([as_sum/1, as_sum/3]).
+-export([as_prod/1, as_prod/2]).
 
--define(ASCII_PRINTABLE_BASE,  96).  % number of printable ASCII characters: 126-31+1
+-define(ASCII_PRINTABLE_SIZE,  96).  % number of printable ASCII characters: 126-31+1
+-define(ASCII_PRINTABLE_BASE, ?ASCII_PRINTABLE_SIZE).
 -define(ASCII_PRINTABLE_START, 31).  % <i>space</i> (code 32) is mapped to 1
 
 % -----------------------------------------------------------------------------
@@ -47,18 +49,31 @@ eq(A, B) -> eq(A, B, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE).
 eq(A, B, Start, Base) -> 
     length(A) == length(B) andalso
     lists:sum(A) == lists:sum(B) andalso       % optimization
-    as_integer(A, Start, Base) == as_integer(B, Start, Base).
+    % as_prod(A, Start) == as_prod(B, Start) andalso 
+    % I think that previous two checks are sufficient 
+    % but was not able to prove this 
+    as_sum(A, Start, Base) == as_sum(B, Start, Base).
 
 % -----------------------------------------------------------------------------
--spec as_integer(string()) -> pos_integer().
+-spec as_sum(string()) -> pos_integer().
 % @doc Calculates unique integer for string.
-% Same as <i>as_integer(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE)</i>
-as_integer(A) -> as_integer(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE).
+% Same as <i>as_sum(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE)</i>
+as_sum(A) -> as_sum(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE).
 
--spec as_integer(string(), pos_integer(), pos_integer()) -> pos_integer().
+-spec as_sum(string(), pos_integer(), pos_integer()) -> pos_integer().
 % @doc Calculates unique integer for string.
-as_integer(A, Start, Base) -> 
-    P = Base * length(A),     % to prevent carring
+as_sum(A, Start, Base) -> 
+    P = Base * length(A),     % to prevent carßrßing
     lists:foldl(fun(X, S) -> (X-Start)*P + S end, 0, A).
+
+% -----------------------------------------------------------------------------
+-spec as_prod(string()) -> pos_integer().
+% @doc Calculates product of all charactes
+% Same as <i>as_prod(A, ?ASCII_PRINTABLE_START)</i>
+as_prod(A) -> as_prod(A, ?ASCII_PRINTABLE_START).
+
+-spec as_prod(string(), pos_integer()) -> pos_integer().
+% @doc Calculates product of all charactes
+as_prod(A, Start) -> lists:foldl(fun(X, P) -> (X-Start)*P end, 1, A).
 
 % -----------------------------------------------------------------------------

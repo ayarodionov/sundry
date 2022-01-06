@@ -32,10 +32,10 @@
 
 %-----------------------------------------------------------------------------------------------
 
-as_integer_test() ->
-    ?assertEqual(57888, anagram:as_integer("cab")),
-    ?assertEqual(57888, anagram:as_integer("abc")),
-    ?assertEqual(57888, anagram:as_integer("bac")),
+as_sum_test() ->
+    ?assertEqual(57888, anagram:as_sum("cab")),
+    ?assertEqual(57888, anagram:as_sum("abc")),
+    ?assertEqual(57888, anagram:as_sum("bac")),
     ok.
 
 %-----------------------------------------------------------------------------------------------
