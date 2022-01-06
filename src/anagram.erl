@@ -23,7 +23,7 @@
 % Checks if two words are are formed by rearaging their letters.
 % Not the fastest way to compare. Can be slow for long strings
 % because big numbers arithmetic is slow.
-% Just foor fun - I tried to use only arithmetic operations.
+% Just for fun - I tried to use only arithmetic operations.
 % @end
 % -----------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ as_sum(A) -> as_sum(A, ?ASCII_PRINTABLE_START, ?ASCII_PRINTABLE_BASE).
 -spec as_sum(string(), pos_integer(), pos_integer()) -> pos_integer().
 % @doc Calculates unique integer for string.
 as_sum(A, Start, Base) -> 
-    P = Base * length(A),     % to prevent carßrßing
+    P = Base * length(A),     % to prevent carring over
     lists:foldl(fun(X, S) -> (X-Start)*P + S end, 0, A).
 
 % -----------------------------------------------------------------------------
