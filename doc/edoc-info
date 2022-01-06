@@ -1,3 +1,3 @@
 %% encoding: UTF-8
 {application,sundry}.
-{modules,[emedian,gsrv,lstree,record_macros,sundry,test_srv]}.
+{modules,[anagram,emedian,gsrv,lstree,record_macros,sundry,test_srv]}.
