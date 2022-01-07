@@ -31,7 +31,6 @@
 -include_lib("eunit/include/eunit.hrl").
 
 %-----------------------------------------------------------------------------------------------
-
 as_sum_test() ->
     ?assertEqual(57888, anagram:as_sum("cab")),
     ?assertEqual(57888, anagram:as_sum("abc")),
@@ -39,7 +38,6 @@ as_sum_test() ->
     ok.
 
 %-----------------------------------------------------------------------------------------------
-
 eq_test() ->
     ?assert(anagram:eq("abc", "abc")),
     ?assert(anagram:eq("abc", "acb")),
@@ -47,6 +45,31 @@ eq_test() ->
 
     ?assertNot(anagram:eq("abc", "xba")),
     ?assertNot(anagram:eq("abc", "cbae")),
+    ok.
+
+%-----------------------------------------------------------------------------------------------
+prime_test() ->
+    ?assertEqual(11, anagram:prime(5)),
+    ?assertEqual(281, anagram:prime(60)),
+    ?assertEqual(523, anagram:prime(99)),
+    ok.
+
+%-----------------------------------------------------------------------------------------------
+as_prime_prod_test() ->
+    ?assertEqual(317, anagram:as_prime_prod("a")),
+    ?assertEqual(331, anagram:as_prime_prod("b")),
+    ?assertEqual(35360399, anagram:as_prime_prod("abc")),
+    ?assertEqual(35360399, anagram:as_prime_prod("cab")),
+    ok.
+
+%-----------------------------------------------------------------------------------------------
+eqp_test() ->
+    ?assert(anagram:eqp("abc", "abc")),
+    ?assert(anagram:eqp("abc", "acb")),
+    ?assert(anagram:eqp("abc", "cba")),
+
+    ?assertNot(anagram:eqp("abc", "xba")),
+    ?assertNot(anagram:eqp("abc", "cbae")),
     ok.
 
 %-------------------------------------------------------------------------------------------------

@@ -19,19 +19,39 @@
 <h2><a name="description">Description</a></h2>
  Checks if two words are are formed by rearaging their letters.
  Not the fastest way to compare. Can be slow for long strings
- because big numbers arithmetic is slow.
+ because big numbers arithmetic is slow, though
+ <i>eqp</i> looks fast enough for me.
  Just for fun - I tried to use only arithmetic operations.
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#as_prod-1">as_prod/1</a></td><td>Calculates product of all charactes
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#as_prime_prod-1">as_prime_prod/1</a></td><td>Calculates product of all charactes mapped to its' prime numbers
+ Same as <i>as_prime_prod(A, ?ASCII_PRINTABLE_START)</i></td></tr>
+<tr><td valign="top"><a href="#as_prime_prod-2">as_prime_prod/2</a></td><td>Calculates product of all charactes mapped to its' prime numbers.</td></tr>
+<tr><td valign="top"><a href="#as_prod-1">as_prod/1</a></td><td>Calculates product of all charactes
  Same as <i>as_prod(A, ?ASCII_PRINTABLE_START)</i></td></tr>
 <tr><td valign="top"><a href="#as_prod-2">as_prod/2</a></td><td>Calculates product of all charactes.</td></tr>
 <tr><td valign="top"><a href="#as_sum-1">as_sum/1</a></td><td>Calculates unique integer for string.</td></tr>
 <tr><td valign="top"><a href="#as_sum-3">as_sum/3</a></td><td>Calculates unique integer for string.</td></tr>
 <tr><td valign="top"><a href="#eq-2">eq/2</a></td><td>Checks that two strings consists of the same multy set of letters.</td></tr>
 <tr><td valign="top"><a href="#eq-4">eq/4</a></td><td>Checks that two strings consists of the same multy set of letters.</td></tr>
+<tr><td valign="top"><a href="#eqp-2">eqp/2</a></td><td>Checks that two strings consists of the same multy set of letters.</td></tr>
+<tr><td valign="top"><a href="#eqp-3">eqp/3</a></td><td>Checks that two strings consists of the same multy set of letters.</td></tr>
+<tr><td valign="top"><a href="#prime-1">prime/1</a></td><td>Retuns prime number (from first 100).</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="as_prime_prod-1">as_prime_prod/1</a></h3>
+<div class="spec">
+<p><tt>as_prime_prod(A::string()) -&gt; pos_integer()</tt><br></p>
+<p> </p>
+</div><p>Calculates product of all charactes mapped to its' prime numbers
+ Same as <i>as_prime_prod(A, ?ASCII_PRINTABLE_START)</i></p>
+
+<h3 class="function"><a name="as_prime_prod-2">as_prime_prod/2</a></h3>
+<div class="spec">
+<p><tt>as_prime_prod(A::string(), Start::pos_integer()) -&gt; pos_integer()</tt><br></p>
+<p> </p>
+</div><p>Calculates product of all charactes mapped to its' prime numbers</p>
 
 <h3 class="function"><a name="as_prod-1">as_prod/1</a></h3>
 <div class="spec">
@@ -71,6 +91,30 @@
 <p><tt>eq(A::string(), B::string(), Start::pos_integer(), Base::pos_integer()) -&gt; boolean()</tt><br></p>
 <p> </p>
 </div><p>Checks that two strings consists of the same multy set of letters.</p>
+
+<h3 class="function"><a name="eqp-2">eqp/2</a></h3>
+<div class="spec">
+<p><tt>eqp(A::string(), B::string()) -&gt; boolean()</tt><br></p>
+<p> </p>
+</div><p>Checks that two strings consists of the same multy set of letters.
+ Uses mapping strings to prime number products for comparison
+ Same as <i>eqp(A, B, ?ASCII_PRINTABLE_START)</i></p>
+
+<h3 class="function"><a name="eqp-3">eqp/3</a></h3>
+<div class="spec">
+<p><tt>eqp(A::string(), B::string(), Start::pos_integer()) -&gt; boolean()</tt><br></p>
+<p> </p>
+</div><p>Checks that two strings consists of the same multy set of letters.
+ Uses mapping strings to prime number products for comparison</p>
+
+<h3 class="function"><a name="prime-1">prime/1</a></h3>
+<div class="spec">
+<p><tt>prime(X1::pos_integer()) -&gt; pos_integer()</tt><br></p>
+<p> </p>
+</div><p>Retuns prime number (from first 100).
+ Numbers taken from <i>wikpedia</i>
+ <a href="https://en.wikipedia.org/wiki/List_of_prime_numbers">
+ <i>"The first 100 prime numbers"</i></a>.</p>
 <hr>
 
 <div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
