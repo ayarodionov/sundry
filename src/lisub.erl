@@ -31,7 +31,7 @@
 % -define(TEST,true).
 
 -ifdef(TEST).
--export([max_second/2, max_second/3, max_insert/2, max_insert/3, ns/2, li/2]).
+-export([max_second/2, max_second/3, max_insert/2, max_insert/3, ns/2, ni/2]).
 -else.
 -compile([{inline, [max_second/2, max_insert/2]}]).
 -endif.

@@ -70,6 +70,7 @@ eqp_test() ->
 
     ?assertNot(anagram:eqp("abc", "xba")),
     ?assertNot(anagram:eqp("abc", "cbae")),
+    ?assertNot(anagram:eqp("abc", "axcvbaebn")),
     ok.
 
 %-------------------------------------------------------------------------------------------------
