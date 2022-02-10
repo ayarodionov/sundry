@@ -47,7 +47,9 @@ ln_test() ->
     ?assertEqual(1,  lisub:ln([2,2,1,1,1])),
     ?assertEqual(2,  lisub:ln([1,2,1,1,1])),
     ?assertEqual(2,  lisub:ln([1,2,2,1,1])),
-    ?assertEqual(6,  lisub:ln([0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15])),
+    ?assertEqual(4,  lisub:ln([10,5,8,3,9,4,12,11])),
+    ?assertEqual(6,  lisub:ln([0,8,4,12,2,10,6,14, 1,9,5,13,3,11,7,15])),
+    ?assertEqual(4,  lisub:li([10.1,5.3,8.4,3.3,9.7,4.3,12.1,11.1])),
     ok.
 
 %-----------------------------------------------------------------------------------------------
@@ -68,7 +70,37 @@ li_test() ->
     ?assertEqual(1,  lisub:li([2,2,1,1,1])),
     ?assertEqual(2,  lisub:li([1,2,1,1,1])),
     ?assertEqual(2,  lisub:li([1,2,2,1,1])),
-    ?assertEqual(6,  lisub:ln([0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15])),
+    ?assertEqual(4,  lisub:li([10,5,8,3,9,4,12,11])),
+    ?assertEqual(6,  lisub:li([0,8,4,12,2,10,6,14, 1,9,5,13,3,11,7,15])),
+    ?assertEqual(4,  lisub:li([10.1,5.3,8.4,3.3,9.7,4.3,12.1,11.1])),
+    ok.
+
+%-----------------------------------------------------------------------------------------------
+lp_test() ->
+    ?assertEqual(0,  lisub:lp([])),
+    ?assertEqual(1,  lisub:lp([1])),
+    ?assertEqual(1,  lisub:lp([1,1,1,1,1])),
+    ?assertEqual(1,  lisub:lp([2,1,1,1,1])),
+    ?assertEqual(1,  lisub:lp([2,2,1,1,1])),
+    ?assertEqual(2,  lisub:lp([1,2,1,1,1])),
+    ?assertEqual(2,  lisub:lp([1,2,2,1,1])),
+    ?assertEqual(4,  lisub:lp([10,5,8,3,9,4,12,11])),
+    ?assertEqual(6,  lisub:lp([0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15])),
+    ?assertEqual(4,  lisub:lp([10.1,5.3,8.4,3.3,9.7,4.3,12.1,11.1])),
+    ok.
+
+%-----------------------------------------------------------------------------------------------
+psort_test() ->
+    ?assertEqual([],         lisub:psort([])),
+    ?assertEqual([[1]],      lisub:psort([1])),
+    ?assertEqual([[1]],      lisub:psort([1,1,1,1,1])),
+    ?assertEqual([[1,2]],    lisub:psort([2,1,1,1,1])),
+    ?assertEqual([[1,2]],    lisub:psort([2,2,1,1,1])),
+    ?assertEqual([[1],[2]],  lisub:psort([1,2,1,1,1])),
+    ?assertEqual([[1],[2]],  lisub:psort([1,2,2,1,1])),
+    ?assertEqual([[3,5,10],[4,8],"\t","\v\f"],  lisub:psort([10,5,8,3,9,4,12,11])),
+    ?assertEqual([[0],[1,2,4,8],[3,5,6,10,12],[7,9,14],"\v\r",[15]],  lisub:psort([0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15])),
+    ?assertEqual([[3.3,5.3,10.1],[4.3,8.4],[9.7],[11.1,12.1]],  lisub:psort([10.1,5.3,8.4,3.3,9.7,4.3,12.1,11.1])),
     ok.
 
 %-----------------------------------------------------------------------------------------------
