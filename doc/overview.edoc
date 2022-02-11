@@ -13,6 +13,7 @@
     <li>{@link record_macros} - collection of macros for working with record field names in run timre.</li>
     <li>{@link test_srv} - simple server for testing purposes. Used for {@link gsrv} testing.</li>
     <li>{@link anagram} - Checks if two words are are formed by rearaging their letters (uses only arithmetics).</li>
+    <li>{@link edioph} -Collection of some arithmetic functions absent in Erlang libraries.</li>
 </ul>
 
 @end

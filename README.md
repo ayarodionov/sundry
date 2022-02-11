@@ -8,5 +8,6 @@
     <li><b><i>record_macros</b></i> - collection of macros for working with record field names in run timre.</li>
     <li><b><i>test_srv</b></i> - simple server for testing purposes. Used for <i>gsrv</i> testing.</li>
     <li><b><i>anagram</b></i> - Checks if two words are are formed by rearaging their letters (uses only arithmetic operaton for comparison).</li>
-    <li><b><i>lisub</b></i> - Erlang implementation of longest increasing subsequence algorithm </li>
+    <li><b><i>lisub</b></i> - Erlang implementation of longest increasing subsequence algorithm.</li>
+    <li><b><i>edioph</b></i> - Collection of some arithmetic functions absent in Erlang libraries.</li>
 </ul>
