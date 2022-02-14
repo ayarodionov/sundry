@@ -26,19 +26,49 @@
 
 %-----------------------------------------------------------------------------------------------
 %% API exports
--export([gcd/2, lcm/2]).
+-export([gcd/2, lcm/2, egcd/2, fib/1]).
+
+-compile({inline, ['_lcm'/2]}).
 
 %-----------------------------------------------------------------------------------------------
-%-----------------------------------------------------------------------------------------------
--spec gcd(pos_integer(), pos_integer())-> pos_integer().
+-spec gcd(integer(), integer())-> non_neg_integer().
 % @doc Greatest common divisor
-gcd(A, B) when A < B -> gcd(B, A);
-gcd(A, 0) -> A;
-gcd(A, B) -> gcd(B, A rem B). 
+gcd(A, B) when A < 0 -> gcd(-A, B);
+gcd(A, B) when B < 0 -> gcd(A, -B);
+gcd(A, B) when A >= 0 andalso B >= 0 -> 
+    case A > B of true -> '_gcd'(A, B); false -> '_gcd'(B, A) end.
+
+-spec '_gcd'(non_neg_integer(), non_neg_integer())-> non_neg_integer().
+% @doc Greatest common divisor; internal function
+'_gcd'(A, 0) -> A;
+'_gcd'(A, B) -> '_gcd'(B, A rem B). 
 
 %-----------------------------------------------------------------------------------------------
--spec lcm(pos_integer(), pos_integer())-> pos_integer().
+-spec lcm(integer(), integer())-> non_neg_integer().
 % @doc  Least common multiple
-lcm(A, B) -> (A div gcd(A, B)) * B.
+lcm(A, B) -> '_lcm'(abs(A), abs(B)).
+
+-spec '_lcm'(non_neg_integer(), non_neg_integer())-> non_neg_integer().
+% @doc  Least common multiple; internal function
+'_lcm'(A, B) when A > B -> (A div '_gcd'(A, B)) * B;
+'_lcm'(A, B)            -> (B div '_gcd'(B, A)) * A.
+
+%-----------------------------------------------------------------------------------------------
+-spec egcd(integer(), integer()) -> {non_neg_integer(), integer(), integer()}.
+% @doc Extended Euclidean algorithm
+egcd(A, 0) -> {A, 1, 0};
+egcd(A, B) -> 
+    {G, X, Y} = egcd(B, A rem B),
+    {G, Y, X - Y*(A div B)}.
+
+%-----------------------------------------------------------------------------------------------
+-spec fib(non_neg_integer()) -> non_neg_integer().
+% @doc Calculates Fibonacci N-th number
+fib(N) -> fib(N, 1, 0).
+
+-spec fib(non_neg_integer(), non_neg_integer(), non_neg_integer()) -> non_neg_integer().
+% @doc Calculates Fibonacci N-th number; internal function
+fib(0, _Fn, Fn1) -> Fn1;
+fib(N,  Fn, Fn1) -> fib(N - 1, Fn + Fn1, Fn).
 
 %-----------------------------------------------------------------------------------------------

@@ -20,21 +20,35 @@
   
                                                                               
 <h2><a name="index">Function Index</a></h2>
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#gcd-2">gcd/2</a></td><td>Greatest common divisor.</td></tr>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#egcd-2">egcd/2</a></td><td>Extended Euclidean algorithm.</td></tr>
+<tr><td valign="top"><a href="#fib-1">fib/1</a></td><td>Calculates Fibonacci N-th number.</td></tr>
+<tr><td valign="top"><a href="#gcd-2">gcd/2</a></td><td>Greatest common divisor.</td></tr>
 <tr><td valign="top"><a href="#lcm-2">lcm/2</a></td><td> Least common multiple.</td></tr>
 </table>
 
 <h2><a name="functions">Function Details</a></h2>
 
+<h3 class="function"><a name="egcd-2">egcd/2</a></h3>
+<div class="spec">
+<p><tt>egcd(A::integer(), B::integer()) -&gt; {non_neg_integer(), integer(), integer()}</tt><br></p>
+<p> </p>
+</div><p>Extended Euclidean algorithm</p>
+
+<h3 class="function"><a name="fib-1">fib/1</a></h3>
+<div class="spec">
+<p><tt>fib(N::non_neg_integer()) -&gt; non_neg_integer()</tt><br></p>
+<p> </p>
+</div><p>Calculates Fibonacci N-th number</p>
+
 <h3 class="function"><a name="gcd-2">gcd/2</a></h3>
 <div class="spec">
-<p><tt>gcd(A::pos_integer(), B::pos_integer()) -&gt; pos_integer()</tt><br></p>
+<p><tt>gcd(A::integer(), B::integer()) -&gt; non_neg_integer()</tt><br></p>
 <p> </p>
 </div><p>Greatest common divisor</p>
 
 <h3 class="function"><a name="lcm-2">lcm/2</a></h3>
 <div class="spec">
-<p><tt>lcm(A::pos_integer(), B::pos_integer()) -&gt; pos_integer()</tt><br></p>
+<p><tt>lcm(A::integer(), B::integer()) -&gt; non_neg_integer()</tt><br></p>
 <p> </p>
 </div><p> Least common multiple</p>
 <hr>
