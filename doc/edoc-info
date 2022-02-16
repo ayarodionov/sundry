@@ -1,4 +1,4 @@
 %% encoding: UTF-8
 {application,sundry}.
-{modules,[anagram,edioph,emedian,gsrv,lisub,lstree,record_macros,sundry,
+{modules,[anagram,cmp,edioph,emedian,gsrv,lisub,lstree,record_macros,sundry,
           sutils,test_srv]}.

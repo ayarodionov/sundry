@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module cmp</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module cmp</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul> 
+Comparision of different ways to write effective code for operations on lists.
+
+
+<h2><a name="description">Description</a></h2><p> 
+Comparision of different ways to write effective code for operations on lists.</p>
+
+ I compare
+ <ol>
+     <li>lists comprehension</li>
+     <li>calculations using lists: module</li>
+     <li>calculations using recursive functions</li>
+ </ol><p> 
+To my surprise the third approach works always better and 
+the second one proved to be the worth</p>
+
+ -----------------------------------------------------------------------------
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#average_time-3">average_time/3</a></td><td>Calculates average time of function executtion.</td></tr>
+<tr><td valign="top"><a href="#cnt-3">cnt/3</a></td><td>Counts number of numbers {Less than  P, Equal to  P}.</td></tr>
+<tr><td valign="top"><a href="#compare_methods-3">compare_methods/3</a></td><td>Calculates everage times calling different function on the same example.</td></tr>
+<tr><td valign="top"><a href="#compare_methods-4">compare_methods/4</a></td><td>Calculates everage times calling different function on the same example.</td></tr>
+<tr><td valign="top"><a href="#filter-3">filter/3</a></td><td>Calls different methods for to filter even numbers from a list.</td></tr>
+<tr><td valign="top"><a href="#mk_example-2">mk_example/2</a></td><td>Creates example for testing.</td></tr>
+<tr><td valign="top"><a href="#time_tst-3">time_tst/3</a></td><td>Calls time:tc Repete times.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="average_time-3">average_time/3</a></h3>
+<div class="spec">
+<p><tt>average_time(Function::function(), Example::[number()], Repete::pos_integer()) -&gt; number()</tt><br></p>
+<p> </p>
+<p>returns: average execution time</p>
+</div><p>Calculates average time of function executtion</p>
+
+<h3 class="function"><a name="cnt-3">cnt/3</a></h3>
+<div class="spec">
+<p><tt>cnt(Lst::[integer()], P::integer(), X3::1 | 2 | 3) -&gt; {integer(), integer()}</tt><br></p>
+<p> </p>
+</div><p><p>Counts number of numbers {Less than  P, Equal to  P}</p>
+
+ <ol>
+     <li><i>cnt(Lst, P, 1)</i> - calls lists:foldl with function inlined</li>
+     <li><i>cnt(Lst, P, 2)</i> - calls lists:foldl</li>
+     <li><i>cnt(Lst, P, 3)</i> - by recursive function</li>
+ </ol>
+ Example:
+ <pre>
+ Erlang/OTP 24 [erts-12.1.5] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [dtrace]
+ Eshell V12.1.5  (abort with ^G)
+ 1&gt; c(cmp).
+ {ok,cmp}
+ 2&gt; R=999, FL = [fun(Lst) -&gt; cmp:cnt(Lst, R, I) end || I - [1,2,3]].
+ 3&gt; cmp:compare_methods(FL, lists:seq(1,10000000), 10).
+ [264023.2,281910.9,108400.2]
+ </pre>
+ Here
+ <ol>
+     <li><i>264023.2</i> - calls lists:foldl with function inlined</li>
+     <li><i>281910.9</i> - calls lists:foldl</li>
+     <li><i>108400.2</i> - by recursive function</li>
+ </ol></p>
+
+<h3 class="function"><a name="compare_methods-3">compare_methods/3</a></h3>
+<div class="spec">
+<p><tt>compare_methods(Functions::[function()], Example::[number()], Repete::pos_integer()) -&gt; [{number(), number()}]</tt><br></p>
+<p> </p>
+<p>returns: list of execution times</p>
+</div><p>Calculates everage times calling different function on the same example</p>
+
+<h3 class="function"><a name="compare_methods-4">compare_methods/4</a></h3>
+<div class="spec">
+<p><tt>compare_methods(Functions::[function()], Length::pos_integer(), Range::pos_integer(), Repete::pos_integer()) -&gt; [number()]</tt><br></p>
+<p> </p>
+<p>returns: list of execution times</p>
+</div><p>Calculates everage times calling different function on the same example</p>
+
+<h3 class="function"><a name="filter-3">filter/3</a></h3>
+<div class="spec">
+<p><tt>filter(Lst::[integer()], P::integer(), X3::1 | 2 | 3) -&gt; [integer()]</tt><br></p>
+<p> </p>
+</div><p><p>Calls different methods for to filter even numbers from a list</p>
+
+ <ol>
+     <li><i>filter(Lst, P, 1)</i> - lists comprehension</li>
+     <li><i>filter(Lst, P, 2)</i> - calls lists:filter</li>
+     <li><i>filter(Lst, P, 3)</i> - by recursive function</li>
+ </ol>
+ Example:
+ <pre>
+ Erlang/OTP 24 [erts-12.1.5] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [dtrace]
+ Eshell V12.1.5  (abort with ^G)
+ 1&gt; c(cmp).
+ {ok,cmp}
+ 2&gt; P=3, FLst = [fun(Lst) -&gt; cmp:filter(Lst, P, I) end || I - [1,2,3]].
+ 3&gt; cmp:compare_methods(FLst, lists:seq(1,10000000), 10).
+ [492005.4,530288.0,329764.3]
+ </pre>
+ Here
+ <ol>
+     <li><i>492005.4</i> - lists comprehension</li>
+     <li><i>530288.0</i> - calls lists:filter</li>
+     <li><i>329764.3</i> - by recursive function</li>
+ </ol></p>
+
+<h3 class="function"><a name="mk_example-2">mk_example/2</a></h3>
+<div class="spec">
+<p><tt>mk_example(Length::pos_integer(), Range::pos_integer()) -&gt; [pos_integer()]</tt><br></p>
+<p> </p>
+</div><p>Creates example for testing</p>
+
+<h3 class="function"><a name="time_tst-3">time_tst/3</a></h3>
+<div class="spec">
+<p><tt>time_tst(Function::function(), Example::[number()], Repete::pos_integer()) -&gt; [{number(), number()}]</tt><br></p>
+<p> </p>
+</div><p>Calls time:tc Repete times</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>
