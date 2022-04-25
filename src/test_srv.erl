@@ -108,7 +108,7 @@ mstart([{N, Timeout} | Tail]) -> [{save_start(N), sleep_time, Timeout} | mstart(
 mstart([N | Tail]) -> [{save_start(N), sleep_time} | mstart(Tail)].
 
 
--spec save_start(non_neg_integer()) -> pid().
+-spec save_start(non_neg_integer()) -> {ok, pid()} | {error,  {already_started, pid()}}.
 save_start(N) when is_integer(N) andalso N >= 0 ->
   case test_srv:start(N) of 
     {ok, P} -> P;

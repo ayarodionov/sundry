@@ -83,7 +83,7 @@ filter3([_ | Tail], P) -> filter3(Tail, P).
 % Eshell V12.1.5  (abort with ^G)
 % 1> c(cmp).
 % {ok,cmp}
-% 2> R=999, FL = [fun(Lst) -> cmp:cnt(Lst, R, I) end || I - [1,2,3]].
+% 2> R=999, FL = [fun(Lst) -> cmp:cnt(Lst, R, I) end || I <- [1,2,3]].
 % 3> cmp:compare_methods(FL, lists:seq(1,10000000), 10).
 % [264023.2,281910.9,108400.2]
 % </pre>
